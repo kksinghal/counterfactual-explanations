@@ -26,7 +26,7 @@ import top_entropy_counterfactual
 
 os.environ['OMP_NUM_THREADS'] = '1'
 
-from scipy.misc import imsave
+# from scipy.misc import imsave
 
 from collections import deque
 
@@ -45,11 +45,11 @@ parser.add_argument('--latent', type=int, default=16)
 parser.add_argument('--wae_latent', type=int, default=128)
 parser.add_argument('--agent_latent', type=int, default=32)
 parser.add_argument('--seed', type=int, default=13)
-parser.add_argument('--env', type=str, default='SpaceInvaders-v0')
-parser.add_argument('--Q', type=str, default="Q")
-parser.add_argument('--P', type=str, default="P")
-parser.add_argument('--missing', type=str, default="")
-parser.add_argument('--agent_file', type=str, default="")
+parser.add_argument('--env', type=str, default='ALE/SpaceInvaders-v5')
+parser.add_argument('--Q', type=str, default="wae_abl_none/Q")
+parser.add_argument('--P', type=str, default="wae_abl_none/P")
+parser.add_argument('--missing', type=str, default="none")
+parser.add_argument('--agent_file', type=str, default="abl_none.tar")
 parser.add_argument('--enc_lam', type=float, default=5)
 parser.add_argument('--clip', type=float, default=.0001)
 parser.add_argument('--gen_lam', type=float, default=.5)
@@ -59,7 +59,7 @@ parser.add_argument('--cf_loss', type=str, default="None")
 parser.add_argument('--m_frames', type=int, default=40)
 parser.add_argument('--fskip', type=int, default=8)
 parser.add_argument('--use_agent', type=int, default=1)
-parser.add_argument('--gpu', type=int, default=7)
+parser.add_argument('--gpu', type=int, default=0)
 
 
 args = parser.parse_args()
