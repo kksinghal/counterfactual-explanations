@@ -55,7 +55,8 @@ class Encoder(nn.Module):
         x = self.leaky(self.batch3(self.conv3(x)))
         x = self.leaky(self.batch4(self.conv4(x)))
         x = self.leaky(self.batch5(self.conv5(x)))
-        x = x.view((-1, self.hidden_units))
+        # x = x.view((-1, self.hidden_units))
+        x = x.reshape((-1, self.hidden_units))
 
         return self.fc(x)
 
@@ -92,7 +93,8 @@ class Generator(nn.Module):
 
     def forward(self, x, y):
         x = F.relu(self.fc(torch.cat([x,y], dim = 1)))
-        x = x.view((-1, self.z_dim, 1, 1))
+        # x = x.view((-1, self.z_dim, 1, 1))
+        x = x.reshape((-1, self.z_dim, 1, 1))
         x = F.relu(self.batch1(self.deconv1(catv(x,y))))
         x = F.relu(self.batch2(self.deconv2(catv(x,y))))
         x = F.relu(self.batch3(self.deconv3(catv(x,y))))
@@ -216,7 +218,8 @@ class Agent(torch.nn.Module): # an actor-critic neural network
         x = F.elu(self.conv2(x))
         x = F.elu(self.conv3(x))
         x = F.elu(self.conv4(x))
-        x = self.linear(x.view(-1, 32 * 5 * 5))
+        # x = self.linear(x.view(-1, 32 * 5 * 5))
+        x = self.linear(x.reshape(-1, 32 * 5 * 5))
         return x
         #return self.critic_linear(x), self.actor_linear(x)
 
