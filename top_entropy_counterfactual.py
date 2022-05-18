@@ -211,7 +211,8 @@ def get_low_entropy_states(agent, frames_to_cf, cur_envs, new_frame_bw, missing 
         logit = agent.pi(agent(state))
         p = F.softmax(logit, dim=1)
 
-        actions = p.max(1)[1].data.cpu().numpy()
+        # actions = p.max(1)[1].data.cpu().numpy()
+        actions = p.max(1)[1].item()
         new_frame, reward, done, _ = env.step(actions)
         rewards += np.clip(reward, -1, 1)
 
