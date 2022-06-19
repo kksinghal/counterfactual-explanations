@@ -22,7 +22,7 @@ import os
 import time
 from math import log2
 from atari_data import MultiEnvironment, ablate_screen
-from env_test import test_game
+#from env_test import test_game
 
 os.environ['OMP_NUM_THREADS'] = '1'
 
@@ -39,15 +39,15 @@ parser.add_argument('--batch_size', type=int, default=64)
 parser.add_argument('--epsilon', type=float, default=.2)
 parser.add_argument('--ae_lr', type=float, default=.0001)
 parser.add_argument('--checkpoint_dir', type=str, default='')
-parser.add_argument('--latent', type=int, default=128)
-parser.add_argument('--agent_latent', type=int, default=128)
+parser.add_argument('--latent', type=int, default=16)
+parser.add_argument('--agent_latent', type=int, default=32)
 parser.add_argument('--env', type=str, default='SpaceInvaders-v0')
-parser.add_argument('--agent_file', type=str, default="SpaceInvaders-v0.fskip7.160.tar")
-parser.add_argument('--missing', type=str, default="")
+parser.add_argument('--agent_file', type=str, default="spaceinvaders-v0-bottom-7fskip_latent32/model.160.tar")
+parser.add_argument('--missing', type=str, default="none")
 parser.add_argument('--info', type=str, default="")
 parser.add_argument('--m_frames', type=int, default=15)
 parser.add_argument('--fskip', type=int, default=8)
-parser.add_argument('--gpu', type=int, default=7)
+parser.add_argument('--gpu', type=int, default=0)
 
 
 args = parser.parse_args()
@@ -232,7 +232,7 @@ def main():
 
     test_env = MultiEnvironment(args.env, args.batch_size, args.fskip)
     print("getting original scores")
-    original_rewards, _ = test_game(agent, Q, P, test_env, args.missing, use_original_agent = True)
+    #original_rewards, _ = test_game(agent, Q, P, test_env, args.missing, use_original_agent = True)
 
     for i in range(args.m_frames):
         train(i)
@@ -241,11 +241,12 @@ def main():
         print("Evaluating the Autoencoder")
         test_env = MultiEnvironment(args.env, args.batch_size, args.fskip)
 
-        total_rewards, total_diffs = test_game(agent, Q, P, test_env, args.missing, use_original_agent = False)
-        print("original score: {:.3f}, std: {:.3f}".format(np.mean(original_rewards),np.std(original_rewards)))
-        print("mean score:     {:.3f}, std: {:.3f}".format(np.mean(total_rewards),   np.std(total_rewards)))
-        print("mean action diff probablity: {:.3f}, std: {:.3f}".format(np.mean(total_diffs),np.std(total_diffs)))
+        #total_rewards, total_diffs = test_game(agent, Q, P, test_env, args.missing, use_original_agent = False)
+        #print("original score: {:.3f}, std: {:.3f}".format(np.mean(original_rewards),np.std(original_rewards)))
+        #print("mean score:     {:.3f}, std: {:.3f}".format(np.mean(total_rewards),   np.std(total_rewards)))
+        #print("mean action diff probablity: {:.3f}, std: {:.3f}".format(np.mean(total_diffs),np.std(total_diffs)))
 
 
 if __name__ == '__main__':
     main()
+
