@@ -42,7 +42,7 @@ parser.add_argument('--checkpoint_dir', type=str, default='')
 parser.add_argument('--epochs', type=int, default=300)
 
 parser.add_argument('--latent', type=int, default=16)
-parser.add_argument('--wae_latent', type=int, default=128)
+parser.add_argument('--wae_latent', type=int, default=16)
 parser.add_argument('--agent_latent', type=int, default=32)
 parser.add_argument('--seed', type=int, default=13)
 parser.add_argument('--env', type=str, default='SpaceInvaders-v4')
