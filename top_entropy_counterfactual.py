@@ -36,19 +36,19 @@ from scipy.ndimage.filters import gaussian_filter
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--checkpoint_dir', type=str, default='checkpoints')
-    parser.add_argument('--img_dir', type=str, default=None)
+    parser.add_argument('--img_dir', type=str, default="img_dir")
 
-    parser.add_argument('--missing', type=str, default="")
+    parser.add_argument('--missing', type=str, default="none")
     parser.add_argument('--latent', type=int, default=16)
-    parser.add_argument('--wae_latent', type=int, default=128)
-    parser.add_argument('--agent_latent', type=int, default=256)
+    parser.add_argument('--wae_latent', type=int, default=16)
+    parser.add_argument('--agent_latent', type=int, default=32)
     parser.add_argument('--gpu', type=int, default=7)
     parser.add_argument('--env', type=str, default='SpaceInvaders-v0')
     parser.add_argument('--enc_file', type=str, default=None)
     parser.add_argument('--gen_file', type=str, default=None)
     parser.add_argument('--Q', type=str, default="Q")
     parser.add_argument('--P', type=str, default="P")
-    parser.add_argument('--seed', type=int, default=0)
+    parser.add_argument('--seed', type=int, default=13)
     parser.add_argument('--agent_file', type=str, default="")
     parser.add_argument('--frame_skip', type=int, default=8)
     parser.add_argument('--speed', type=float, default=.01)
@@ -568,3 +568,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
